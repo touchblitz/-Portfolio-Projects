@@ -1,0 +1,1 @@
+with streams as ( select user_id , song_id , song_plays FROM songs_history UNION ALL select user_id, song_id, count(song_id) as song_plays from songs_weekly WHERE date(listen_time) <= '2022-08-04' GROUP BY user_id, song_id order by song_plays desc ) select user_id, song_id, sum (song_plays) as song_count from streams GROUP BY user_id, song_id order by song_count desc
